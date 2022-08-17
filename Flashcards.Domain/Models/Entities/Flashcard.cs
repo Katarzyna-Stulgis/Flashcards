@@ -8,6 +8,7 @@
         public int DeckId { get; set; }
         public Deck Deck { get; set; }
 
-        public ICollection<FlashcardLevel> FlashcardLevels { get; set; }
+        public ICollection<User> Users { get; set; }
+        public List<FlashcardLevel> FlashcardLevels { get; set; }
     }
 }

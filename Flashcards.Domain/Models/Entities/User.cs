@@ -7,7 +7,8 @@
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public ICollection<User> Users { get; set; }
-        public ICollection<FlashcardLevel> FlashcardLevels { get; set; }
+        public ICollection<Role> Roles { get; set; }
+        public ICollection<Flashcard> Flashcards { get; set; }
+        public List<FlashcardLevel> FlashcardLevels { get; set; }
     }
 }
