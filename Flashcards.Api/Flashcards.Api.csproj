@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Flashcards.Dal\Flashcards.Dal.csproj" />
+    <ProjectReference Include="..\Flashcards.Service\Flashcards.Service.csproj" />
   </ItemGroup>
 
 </Project>
