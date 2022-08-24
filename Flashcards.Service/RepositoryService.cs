@@ -2,7 +2,7 @@
 
 namespace Flashcards.Service
 {
-    public class RepositoryService<T> : IFlashcardService<T>
+    public abstract class RepositoryService<T> : IFlashcardService<T>
         where T : class
     {
         protected readonly IFlashcardService<T> _repository;

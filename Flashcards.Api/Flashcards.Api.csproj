@@ -15,12 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Flashcards.Dal\Flashcards.Dal.csproj" />
+    <ProjectReference Include="..\Flashcards.Service\Flashcards.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Flashcards.Dal\Flashcards.Dal.csproj" />
-    <ProjectReference Include="..\Flashcards.Service\Flashcards.Service.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

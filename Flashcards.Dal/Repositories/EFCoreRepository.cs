@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Flashcards.Dal.Repositories
 {
-    public class EFCoreRepository<T, TDbContext> : IFlashcardsRepository<T>
+    public abstract class EFCoreRepository<T, TDbContext> : IFlashcardsRepository<T>
         where T : class
         where TDbContext : DbContext
     {
