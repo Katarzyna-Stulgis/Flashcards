@@ -5,7 +5,7 @@ namespace Flashcards.Service.DataServices
 {
     public class FolderService : RepositoryService<Folder>
     {
-        public FolderService(IFlashcardService<Folder> repository) : base(repository)
+        public FolderService(IFlashcardsRepository<Folder> repository) : base(repository)
         {
         }
     }

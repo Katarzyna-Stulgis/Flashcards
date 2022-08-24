@@ -5,6 +5,6 @@ namespace Flashcards.Service.DataServices
 {
     public class FlashcardService : RepositoryService<Flashcard>
     {
-        public FlashcardService(IFlashcardService<Flashcard> repository) : base(repository) { }
+        public FlashcardService(IFlashcardsRepository<Flashcard> repository) : base(repository) { }
     }
 }

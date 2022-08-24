@@ -18,9 +18,9 @@ namespace Flashcards.Dal.Repositories
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T> GetAsync(int id)
+        public virtual async Task<T> GetAsync(Guid guid)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await _dbContext.Set<T>().FindAsync(guid);
         }
 
         public virtual async Task<T> AddAsync(T entity)
@@ -39,9 +39,9 @@ namespace Flashcards.Dal.Repositories
             return entity;
         }
 
-        public virtual async Task<T> DeleteAsync(int id)
+        public virtual async Task<T> DeleteAsync(Guid guid)
         {
-            var entity = await _dbContext.Set<T>().FindAsync(id);
+            var entity = await _dbContext.Set<T>().FindAsync(guid);
 
             if (entity == null)
             {
@@ -54,9 +54,9 @@ namespace Flashcards.Dal.Repositories
             return entity;
         }
 
-        public bool ExistsAsync(int id)
+        public bool ExistsAsync(Guid guid)
         {
-            return _dbContext.Set<T>().Find(id) != null;
+            return _dbContext.Set<T>().Find(guid) != null;
         }
     }
 }

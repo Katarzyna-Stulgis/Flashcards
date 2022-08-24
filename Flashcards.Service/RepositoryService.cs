@@ -5,9 +5,9 @@ namespace Flashcards.Service
     public abstract class RepositoryService<T> : IFlashcardService<T>
         where T : class
     {
-        protected readonly IFlashcardService<T> _repository;
+        protected readonly IFlashcardsRepository<T> _repository;
 
-        public RepositoryService(IFlashcardService<T> repository)
+        public RepositoryService(IFlashcardsRepository<T> repository)
         {
             _repository = repository;
         }
@@ -17,9 +17,9 @@ namespace Flashcards.Service
             return await _repository.GetAllAsync();
         }
 
-        public virtual async Task<T> GetAsync(int id)
+        public virtual async Task<T> GetAsync(Guid guid)
         {
-            return await _repository.GetAsync(id);
+            return await _repository.GetAsync(guid);
         }
 
         public virtual async Task<T> AddAsync(T entity)
@@ -32,14 +32,14 @@ namespace Flashcards.Service
             return await _repository.UpdateAsync(entity);
         }
 
-        public virtual async Task<T> DeleteAsync(int id)
+        public virtual async Task<T> DeleteAsync(Guid guid)
         {
-            return await _repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(guid);
         }
 
-        public virtual bool ExistsAsync(int id)
+        public virtual bool ExistsAsync(Guid guid)
         {
-            return _repository.ExistsAsync(id);
+            return _repository.ExistsAsync(guid);
         }
     }
 }
