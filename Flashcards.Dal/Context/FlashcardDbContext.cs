@@ -82,6 +82,105 @@ namespace Flashcards.Dal.Context
                 {
                     j.HasKey(t => new { t.FolderId, t.DeckId });
                 });
+
+            // data
+            var roleUser = new Role
+            {
+                RoleId = Guid.NewGuid(),
+                Name = "User"
+            };
+            var roleAdmin = new Role
+            {
+                RoleId = Guid.NewGuid(),
+                Name = "Admin"
+            };
+
+            var user1 = new User
+            {
+                UserId = Guid.NewGuid(),
+                Name = "User1",
+                Email = "User1@flashcards.com",
+                Password = "User1"
+            };
+
+            var user2 = new User
+            {
+                UserId = Guid.NewGuid(),
+                Name = "User2",
+                Email = "User2@flashcards.com",
+                Password = "User2"
+            };
+
+            var folder1 = new Folder
+            {
+                FolderId = Guid.NewGuid(),
+                UserId = user1.UserId,
+                Name = "Folder1",
+            };
+
+            var folder2 = new Folder
+            {
+                FolderId = Guid.NewGuid(),
+                UserId = user1.UserId,
+                Name = "Folder2",
+            };
+
+            var deck1 = new Deck
+            {
+                DeckId = Guid.NewGuid(),
+                Title = "Deck1",
+                VisibilityType = Domain.Models.Enums.VisibilityType.Public
+            };
+
+            var deck2 = new Deck
+            {
+                DeckId = Guid.NewGuid(),
+                Title = "Deck2",
+                VisibilityType = Domain.Models.Enums.VisibilityType.Public
+            };
+
+            var flashcard1 = new Flashcard
+            {
+                FlashcardId = Guid.NewGuid(),
+                Question = "KOT",
+                Answer = "CAT",
+                DeckId = deck1.DeckId
+            };
+
+            var flashcard2 = new Flashcard
+            {
+                FlashcardId = Guid.NewGuid(),
+                Question = "PIES",
+                Answer = "DOG",
+                DeckId = deck1.DeckId
+            };
+
+            // Add data to Db
+            modelBuilder.Entity<Role>().HasData(roleUser, roleAdmin);
+
+            modelBuilder.Entity<User>().HasData(user1, user2);
+
+            modelBuilder.Entity<RoleUser>().HasData(
+                new RoleUser { RoleId = roleUser.RoleId, UserId = user1.UserId },
+                new RoleUser { RoleId = roleUser.RoleId, UserId = user2.UserId });
+
+            modelBuilder.Entity<Folder>().HasData(folder1, folder2);
+
+            modelBuilder.Entity<Deck>().HasData(deck1, deck2);
+
+            modelBuilder.Entity<DeckFolder>().HasData(
+                new DeckFolder { DeckId = deck1.DeckId, FolderId = folder1.FolderId, },
+                new DeckFolder { DeckId = deck2.DeckId, FolderId = folder1.FolderId, });
+
+            modelBuilder.Entity<DeckUser>().HasData(
+                new DeckUser { DeckId = deck1.DeckId, UserId = user1.UserId, IsEditable = true },
+                new DeckUser { DeckId = deck2.DeckId, UserId = user1.UserId, IsEditable = true });
+
+            modelBuilder.Entity<Flashcard>().HasData(flashcard1, flashcard2);
+
+            modelBuilder.Entity<FlashcardLevel>().HasData(
+                new FlashcardLevel { FlashcardId = flashcard1.FlashcardId, UserId = user1.UserId, Level = Domain.Models.Enums.Level.learning },
+                new FlashcardLevel { FlashcardId = flashcard2.FlashcardId, UserId = user1.UserId, Level = Domain.Models.Enums.Level.learning });
         }
     }
 }

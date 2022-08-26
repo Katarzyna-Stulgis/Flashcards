@@ -5,7 +5,7 @@ namespace Flashcards.Domain.Models.Entities
 {
     public class FlashcardLevel
     {
-        public Level level { get; set; }
+        public Level Level { get; set; }
 
         public Guid FlashcardId { get; set; }
         public Flashcard Flashcard { get; set; }

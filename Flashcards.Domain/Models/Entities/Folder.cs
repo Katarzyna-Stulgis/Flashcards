@@ -4,7 +4,7 @@
     {
         public Guid FolderId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public ICollection<Deck>? Decks { get; set; }
         public List<DeckFolder>? DeckFolders { get; set; }
