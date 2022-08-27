@@ -7,11 +7,11 @@ namespace Flashcards.Api.Controllers
 {
     [Route("api/flashcards")]
     [ApiController]
-    public class FlashcardController : ControllerBase
+    public class FlashcardsController : ControllerBase
     {
         private readonly IFlashcardService<Flashcard> _flashcardService;
 
-        public FlashcardController(IFlashcardService<Flashcard> flashcardService)
+        public FlashcardsController(IFlashcardService<Flashcard> flashcardService)
         {
             _flashcardService = flashcardService;
         }
@@ -23,7 +23,7 @@ namespace Flashcards.Api.Controllers
             return Ok(task);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{guid}")]
         public async Task<ActionResult<Flashcard>> Get([FromRoute] Guid guid)
         {
             var task = await _flashcardService.GetAsync(guid);
