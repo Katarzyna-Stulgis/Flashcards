@@ -4,6 +4,7 @@ using Flashcards.Dal.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flashcards.Dal.Migrations
 {
     [DbContext(typeof(FlashcardDbContext))]
-    partial class FlashcardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220829111720_change role-user relation")]
+    partial class changeroleuserrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

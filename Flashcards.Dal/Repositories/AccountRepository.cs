@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Flashcards.Dal.Repositories
 {
-    public class UserRepository<TDbContext> : IAccountRepository
+    public class AccountRepository<TDbContext> : IAccountRepository
         where TDbContext : DbContext
     {
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly TDbContext _dbContext;
 
-        public UserRepository(IPasswordHasher<User> passwordHasher, TDbContext dbContext)
+        public AccountRepository(IPasswordHasher<User> passwordHasher, TDbContext dbContext)
         {
             _passwordHasher = passwordHasher;
             _dbContext = dbContext;
@@ -20,11 +20,16 @@ namespace Flashcards.Dal.Repositories
 
         public async Task<User> Register(User entity)
         {
+            var role = await _dbContext.Set<Role>()
+                .Where(x=>x.Name.ToLower() == "user".ToLower())
+                .FirstOrDefaultAsync();
+
             var newUser = new User()
             {
                 UserId = Guid.NewGuid(),
                 Name = entity.Name,
-                Email = entity.Email
+                Email = entity.Email,
+                RoleId = role.RoleId
             };
 
             var hashedPassword = _passwordHasher.HashPassword(newUser, entity.Password);

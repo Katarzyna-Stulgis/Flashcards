@@ -1,5 +1,4 @@
 ﻿using Flashcards.Domain.Models.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flashcards.Domain.Models.Entities
 {

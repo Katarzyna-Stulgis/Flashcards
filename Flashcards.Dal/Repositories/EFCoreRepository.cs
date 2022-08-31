@@ -1,4 +1,5 @@
-﻿using Flashcards.Domain.Interfaces;
+﻿using Flashcards.Domain.Exceptions;
+using Flashcards.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flashcards.Dal.Repositories
@@ -20,7 +21,13 @@ namespace Flashcards.Dal.Repositories
 
         public virtual async Task<T> GetAsync(Guid guid)
         {
-            return await _dbContext.Set<T>().FindAsync(guid);
+            var entity = await _dbContext.Set<T>().FindAsync(guid);
+
+            if (entity == null)
+            {
+                throw new NotFoundException("Not found");
+            }
+            return entity;
         }
 
         public virtual async Task<T> AddAsync(T entity)
@@ -45,7 +52,7 @@ namespace Flashcards.Dal.Repositories
 
             if (entity == null)
             {
-                return null;
+                throw new NotFoundException("Not found");
             }
 
             _dbContext.Set<T>().Remove(entity);

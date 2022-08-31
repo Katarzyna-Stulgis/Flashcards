@@ -1,21 +1,22 @@
-﻿using Flashcards.Domain.Interfaces;
+﻿using Flashcards.Domain.Exceptions;
+using Flashcards.Domain.Interfaces;
+using Flashcards.Domain.Models;
 using Flashcards.Domain.Models.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Flashcards.Domain.Models;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace Flashcards.Service.DataServices
 {
-    public class UserService : IAccountService
+    public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
 
-        public UserService(IPasswordHasher<User> passwordHasher, IAccountRepository accountRepository, AuthenticationSettings authenticationSettings)
+        public AccountService(IPasswordHasher<User> passwordHasher, IAccountRepository accountRepository, AuthenticationSettings authenticationSettings)
         {
             _accountRepository = accountRepository;
             _passwordHasher = passwordHasher;
@@ -33,14 +34,14 @@ namespace Flashcards.Service.DataServices
 
             if (user is null)
             {
-                return null;
+                throw new BadRequestException("Invalid e-mail or password");
             }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.Password, entity.Password);
 
             if (result == PasswordVerificationResult.Failed)
             {
-                return null;
+                throw new BadRequestException("Invalid e-mail or password");
             }
 
             var claims = new List<Claim>()

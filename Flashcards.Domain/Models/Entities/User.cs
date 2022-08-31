@@ -7,9 +7,9 @@
         public string Email { get; set; }
         public string Password { get; set; }
 
+        public Guid RoleId { get; set; }
+        public Role? Role { get; set; }
         public ICollection<Folder>? Folders { get; set; }
-        public ICollection<Role>? Roles { get; set; }
-        public List<RoleUser>? RoleUsers { get; set; }
         public ICollection<Flashcard>? Flashcards { get; set; }
         public List<FlashcardLevel>? FlashcardLevels { get; set; }
         public ICollection<Deck>? Decks { get; set; }

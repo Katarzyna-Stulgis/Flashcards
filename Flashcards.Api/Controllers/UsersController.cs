@@ -1,7 +1,7 @@
-﻿using Flashcards.Domain.Interfaces;
+﻿using AutoMapper;
+using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
-using Flashcards.Service.DataServices;
-using Microsoft.AspNetCore.Http;
+using Flashcards.Service.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards.Api.Controllers
@@ -10,36 +10,31 @@ namespace Flashcards.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IAccountService _userService;
+        private readonly IAccountService _accountService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IAccountService userService)
+        public UsersController(IAccountService userService, IMapper mapper)
         {
-            _userService = userService;
+            _accountService = userService;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> RegisterUser([FromBody] User user)
+        public async Task<ActionResult<User>> RegisterUser([FromBody] RegisterUserDto dto)
         {
-            User task;
-            try
-            {
-                task = await _userService.Register(user);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-            return Ok(task);
+            var user = _mapper.Map<User>(dto);
+            await _accountService.Register(user);
+
+            return Ok("User register");
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] User user)
+        public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
-            string token =  _userService.GenerateJwt(user);
+            var user = _mapper.Map<User>(dto);
+            string token = _accountService.GenerateJwt(user);
 
             return Ok(token);
         }
-
-
     }
 }

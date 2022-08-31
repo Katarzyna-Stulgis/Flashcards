@@ -32,23 +32,6 @@ namespace Flashcards.Dal.Context
                      j.HasKey(t => new { t.UserId, t.FlashcardId });
                  });
 
-            modelBuilder.Entity<Role>()
-            .HasMany(p => p.Users)
-            .WithMany(p => p.Roles)
-            .UsingEntity<RoleUser>(
-                j => j
-                    .HasOne(pt => pt.User)
-                    .WithMany(t => t.RoleUsers)
-                    .HasForeignKey(pt => pt.UserId),
-                j => j
-                    .HasOne(pt => pt.Role)
-                    .WithMany(p => p.RoleUsers)
-                    .HasForeignKey(pt => pt.RoleId),
-                j =>
-                {
-                    j.HasKey(t => new { t.RoleId, t.UserId });
-                });
-
             modelBuilder.Entity<Deck>()
             .HasMany(p => p.Users)
             .WithMany(p => p.Decks)
@@ -100,7 +83,8 @@ namespace Flashcards.Dal.Context
                 UserId = Guid.NewGuid(),
                 Name = "User1",
                 Email = "User1@flashcards.com",
-                Password = "User1"
+                Password = "User1",
+                RoleId = roleUser.RoleId
             };
 
             var user2 = new User
@@ -108,7 +92,8 @@ namespace Flashcards.Dal.Context
                 UserId = Guid.NewGuid(),
                 Name = "User2",
                 Email = "User2@flashcards.com",
-                Password = "User2"
+                Password = "User2",
+                RoleId = roleUser.RoleId
             };
 
             var folder1 = new Folder
@@ -159,10 +144,6 @@ namespace Flashcards.Dal.Context
             modelBuilder.Entity<Role>().HasData(roleUser, roleAdmin);
 
             modelBuilder.Entity<User>().HasData(user1, user2);
-
-            modelBuilder.Entity<RoleUser>().HasData(
-                new RoleUser { RoleId = roleUser.RoleId, UserId = user1.UserId },
-                new RoleUser { RoleId = roleUser.RoleId, UserId = user2.UserId });
 
             modelBuilder.Entity<Folder>().HasData(folder1, folder2);
 

@@ -27,10 +27,6 @@ namespace Flashcards.Api.Controllers
         public async Task<ActionResult<Folder>> Get([FromRoute] Guid id)
         {
             var task = await _folderService.GetAsync(id);
-            if (task == null)
-            {
-                return NotFound("Folder not found");
-            }
             return Ok(task);
         }
 
