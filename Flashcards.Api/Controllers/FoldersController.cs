@@ -1,5 +1,7 @@
-﻿using Flashcards.Domain.Interfaces;
+﻿using AutoMapper;
+using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
+using Flashcards.Service.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,17 +12,20 @@ namespace Flashcards.Api.Controllers
     public class FoldersController : ControllerBase
     {
         private readonly IFlashcardService<Folder> _folderService;
+        private readonly IMapper _mapper;
 
-        public FoldersController(IFlashcardService<Folder> folderService)
+        public FoldersController(IFlashcardService<Folder> folderService, IMapper mapper)
         {
             _folderService = folderService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Folder>>> GetAll()
         {
             var task = await _folderService.GetAllAsync();
-            return Ok(task);
+            var dto = _mapper.Map<List<FolderDto>>(task);
+            return Ok(dto);
         }
 
         [HttpGet("{id}")]
@@ -31,17 +36,11 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Folder>> Add([FromBody] Folder folder)
+        public async Task<ActionResult<Folder>> Add([FromBody] FolderDto dto)
         {
-            Folder task;
-            try
-            {
-                task = await _folderService.AddAsync(folder);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var folder = _mapper.Map<Folder>(dto);
+            var task = await _folderService.AddAsync(folder);
+        
             return Ok(task);
         }
 
