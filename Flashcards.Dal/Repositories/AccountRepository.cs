@@ -21,7 +21,7 @@ namespace Flashcards.Dal.Repositories
         public async Task<User> Register(User entity)
         {
             var role = await _dbContext.Set<Role>()
-                .Where(x=>x.Name.ToLower() == "user".ToLower())
+                .Where(x=>x.Name.ToLower() == "user")
                 .FirstOrDefaultAsync();
 
             var newUser = new User()

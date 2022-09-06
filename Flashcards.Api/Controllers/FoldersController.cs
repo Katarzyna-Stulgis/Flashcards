@@ -40,7 +40,7 @@ namespace Flashcards.Api.Controllers
         {
             var folder = _mapper.Map<Folder>(dto);
             var task = await _folderService.AddAsync(folder);
-        
+
             return Ok(task);
         }
 
@@ -65,13 +65,7 @@ namespace Flashcards.Api.Controllers
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
             var task = await _folderService.DeleteAsync(id);
-
-            if (task != null)
-            {
-                return Ok($"Folder deleted (id: {id})");
-            }
-
-            return NotFound("Folder not found");
+            return Ok($"Folder deleted (id: {id})");
         }
     }
 }
