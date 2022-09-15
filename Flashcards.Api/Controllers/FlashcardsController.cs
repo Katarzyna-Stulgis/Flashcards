@@ -52,18 +52,8 @@ namespace Flashcards.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Flashcard flashcard)
         {
-            if (id != flashcard.FlashcardId)
-            {
-                return BadRequest();
-            }
-
             var task = await _flashcardService.UpdateAsync(flashcard);
-            if (task != null)
-            {
-                return Ok("Flashcard edited id: " + task.FlashcardId);
-            }
-
-            return NotFound("Flashcard not found");
+            return Ok(task.FlashcardId);
         }
 
         [HttpDelete("{id}")]

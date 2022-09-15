@@ -1,5 +1,7 @@
-﻿using Flashcards.Domain.Interfaces;
+﻿using AutoMapper;
+using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
+using Flashcards.Service.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,28 +12,28 @@ namespace Flashcards.Api.Controllers
     public class DecksController : ControllerBase
     {
         private readonly IFlashcardService<Deck> _deckService;
+        private readonly IMapper _mapper;
 
-        public DecksController(IFlashcardService<Deck> deckService)
+        public DecksController(IFlashcardService<Deck> deckService, IMapper mapper)
         {
             _deckService = deckService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Deck>>> GetAll()
         {
             var task = await _deckService.GetAllAsync();
-            return Ok(task);
+            var dto = _mapper.Map<List<DeckDto>>(task);
+            return Ok(dto);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Deck>> Get([FromRoute] Guid id)
         {
             var task = await _deckService.GetAsync(id);
-            if (task == null)
-            {
-                return NotFound("Deck not found");
-            }
-            return Ok(task);
+            var dto = _mapper.Map<DeckDto>(task);
+            return Ok(dto);
         }
 
         [HttpPost]

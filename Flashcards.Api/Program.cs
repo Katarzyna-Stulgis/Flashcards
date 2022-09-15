@@ -38,7 +38,8 @@ builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddAutoMapper(
     typeof(Program),
     typeof(RegisterProfile),
-    typeof(LoginProfile)
+    typeof(LoginProfile),
+    typeof(DeckProfile)
     );
 
 

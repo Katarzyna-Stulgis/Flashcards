@@ -47,25 +47,16 @@ namespace Flashcards.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Folder folder)
         {
-            if (id != folder.FolderId)
-            {
-                return BadRequest();
-            }
-
             var task = await _folderService.UpdateAsync(folder);
-            if (task != null)
-            {
-                return Ok("Folder edited id: " + task.FolderId);
-            }
+           return Ok(task.FolderId);
 
-            return NotFound("Folder not found");
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
             var task = await _folderService.DeleteAsync(id);
-            return Ok($"Folder deleted (id: {id})");
+            return Ok(id);
         }
     }
 }
