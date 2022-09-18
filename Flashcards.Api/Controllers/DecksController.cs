@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
+using Flashcards.Service.DataServices;
 using Flashcards.Service.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,17 +38,12 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Flashcard>> Add([FromBody] Deck deck)
+        public async Task<ActionResult<Flashcard>> Add([FromBody] Deck dto)
         {
-            Deck task;
-            try
-            {
-                task = await _deckService.AddAsync(deck);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+          //  var deck = _mapper.Map<Deck>(dto);
+            var task = await _deckService.AddAsync(dto);
+            //doaać tabale epośredniczace deck i levels
+
             return Ok(task);
         }
 

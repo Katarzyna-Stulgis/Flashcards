@@ -11,7 +11,7 @@ namespace Flashcards.Service.Profiles
 
             CreateMap<Flashcard, FlashcardDto>();
             CreateMap<Deck, DeckDto>()
-                .ForMember(dest => dest.Flashcards, opt => opt.MapFrom(src => src.Flashcards));
+                .ForMember(dest => dest.Flashcards, opt => opt.MapFrom(src => src.Flashcards)).ReverseMap(); ;
         }
     }
 }

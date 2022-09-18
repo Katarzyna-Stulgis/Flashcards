@@ -7,7 +7,7 @@ namespace Flashcards.Service.Dtos
         public Guid DeckId { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
-        public int? FlashcardAmount => Flashcards.Count;
+        public int? FlashcardAmount => Flashcards != null ? Flashcards!.Count : 0;
         public ICollection<FlashcardDto>? Flashcards { get; set; }
     }
 }
