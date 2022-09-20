@@ -8,8 +8,9 @@ namespace Flashcards.Service.Profiles
     {
         public DeckProfile()
         {
-
-            CreateMap<Flashcard, FlashcardDto>();
+            CreateMap<DeckUser, DeckUserDto>().ReverseMap();
+            CreateMap<Flashcard, FlashcardDto>().ReverseMap();
+            CreateMap<DeckFolder, DeckFolderDto>().ReverseMap();
             CreateMap<Deck, DeckDto>()
                 .ForMember(dest => dest.Flashcards, opt => opt.MapFrom(src => src.Flashcards)).ReverseMap(); ;
         }

@@ -9,5 +9,8 @@ namespace Flashcards.Service.Dtos
         public string? Description { get; set; }
         public int? FlashcardAmount => Flashcards != null ? Flashcards!.Count : 0;
         public ICollection<FlashcardDto>? Flashcards { get; set; }
+
+        public List<DeckFolderDto>? DeckFolders { get; set; }
+        public List<DeckUserDto> DeckUsers { get; set; }
     }
 }

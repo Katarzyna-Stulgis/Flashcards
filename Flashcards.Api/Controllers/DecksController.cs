@@ -38,13 +38,13 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Flashcard>> Add([FromBody] Deck dto)
+        public async Task<ActionResult<Flashcard>> Add([FromBody] DeckDto dto)
         {
-          //  var deck = _mapper.Map<Deck>(dto);
-            var task = await _deckService.AddAsync(dto);
+            var deck = _mapper.Map<Deck>(dto);
+            var task = await _deckService.AddAsync(deck);
             //doaać tabale epośredniczace deck i levels
 
-            return Ok(task);
+            return Ok(task.DeckId);
         }
 
         [HttpPut("{id}")]
