@@ -61,12 +61,7 @@ namespace Flashcards.Api.Controllers
         {
             var task = await _flashcardService.DeleteAsync(id);
 
-            if (task != null)
-            {
-                return Ok($"Flashcard deleted (id: {id})");
-            }
-
-            return NotFound("Flashcard not found");
+            return Ok(id);
         }
     }
 }

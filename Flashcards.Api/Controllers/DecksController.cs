@@ -48,33 +48,19 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Deck deck)
+        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] DeckDto dto)
         {
-            if (id != deck.DeckId)
-            {
-                return BadRequest();
-            }
-
+            var deck = _mapper.Map<Deck>(dto);
             var task = await _deckService.UpdateAsync(deck);
-            if (task != null)
-            {
-                return Ok("Deck edited id: " + deck.DeckId);
-            }
-
-            return NotFound("Deck not found");
+            return Ok(task.DeckId);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
             var task = await _deckService.DeleteAsync(id);
+            return Ok(id);
 
-            if (task != null)
-            {
-                return Ok($"Deck deleted (id: {id})");
-            }
-
-            return NotFound("Deck not found");
         }
 
     }
