@@ -25,7 +25,7 @@ namespace Flashcards.Api.Controllers
             var user = _mapper.Map<User>(dto);
             await _accountService.Register(user);
 
-            return Ok("User register");
+            return Ok(user.UserId);
         }
 
         [HttpPost("login")]
