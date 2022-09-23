@@ -7,9 +7,10 @@ namespace Flashcards.Dal.Repositories
     {
         public FolderRepository(DbContext dbContext) : base(dbContext) { }
 
-        public override async Task<IEnumerable<Folder>> GetAllAsync()
+        public override async Task<IEnumerable<Folder>> GetAllAsync(Guid userId)
         {
             var folders = await _dbContext.Set<Folder>()
+                .Where(f => f.UserId == userId)
                 .Include(f => f.Decks).ToListAsync();
 
             return folders;
@@ -18,7 +19,6 @@ namespace Flashcards.Dal.Repositories
         public override Task<Folder> AddAsync(Folder entity)
         {
             entity.FolderId = Guid.NewGuid();
-            entity.UserId = new Guid("e22e7101-058e-47cd-8d6f-66633d596fad"); //delete this
             return base.AddAsync(entity);
         }
 

@@ -46,8 +46,9 @@ namespace Flashcards.Service.DataServices
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Name.ToString()),
+                new Claim("UserId", user.UserId.ToString()),
+                new Claim("Name", user.Name.ToString()),
+                new Claim("E-mail", user.Email.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));

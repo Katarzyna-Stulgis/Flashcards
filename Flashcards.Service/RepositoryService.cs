@@ -12,9 +12,9 @@ namespace Flashcards.Service
             _repository = repository;
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync(Guid userId)
         {
-            return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(userId);
         }
 
         public virtual async Task<T> GetAsync(Guid guid)

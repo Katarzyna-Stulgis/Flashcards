@@ -14,7 +14,7 @@ namespace Flashcards.Dal.Repositories
         {
             _dbContext = dbContext;
         }
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync(Guid userId)
         {
             return await _dbContext.Set<T>().ToListAsync();
         }

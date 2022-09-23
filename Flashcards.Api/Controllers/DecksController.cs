@@ -22,9 +22,9 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Deck>>> GetAll()
+        public async Task<ActionResult<List<Deck>>> GetAll(Guid userId)
         {
-            var task = await _deckService.GetAllAsync();
+            var task = await _deckService.GetAllAsync(userId);
             var dto = _mapper.Map<List<DeckDto>>(task);
             return Ok(dto);
         }

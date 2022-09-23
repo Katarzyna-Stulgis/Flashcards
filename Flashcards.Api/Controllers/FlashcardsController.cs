@@ -17,9 +17,9 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Flashcard>>> GetAll()
+        public async Task<ActionResult<List<Flashcard>>> GetAll(Guid userId)
         {
-            var task = await _flashcardService.GetAllAsync();
+            var task = await _flashcardService.GetAllAsync(userId);
             return Ok(task);
         }
 

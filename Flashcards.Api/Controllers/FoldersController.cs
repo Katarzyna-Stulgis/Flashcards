@@ -21,9 +21,9 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Folder>>> GetAll()
+        public async Task<ActionResult<List<Folder>>> GetAll(Guid userId)
         {
-            var task = await _folderService.GetAllAsync();
+            var task = await _folderService.GetAllAsync(userId);
             var dto = _mapper.Map<List<FolderDto>>(task);
             return Ok(dto);
         }
