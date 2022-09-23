@@ -42,7 +42,6 @@ namespace Flashcards.Api.Controllers
         {
             var deck = _mapper.Map<Deck>(dto);
             var task = await _deckService.AddAsync(deck);
-            //doaać tabale epośredniczace deck i levels
 
             return Ok(task.DeckId);
         }
