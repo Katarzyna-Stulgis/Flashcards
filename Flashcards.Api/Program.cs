@@ -76,6 +76,7 @@ builder.Services.AddScoped<IFlashcardService<Deck>, DeckService>();
 builder.Services.AddScoped<IFlashcardService<Flashcard>, FlashcardService>();
 builder.Services.AddScoped<IFlashcardService<Folder>, FolderService>();
 builder.Services.AddScoped<IFlashcardService<Role>, RoleService>();
+builder.Services.AddScoped<IFlashcardService<DeckUser>, DeckUserService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
@@ -84,6 +85,7 @@ builder.Services.AddScoped<IFlashcardsRepository<Deck>, DeckRepository>();
 builder.Services.AddScoped<IFlashcardsRepository<Flashcard>, FlashcardRepository>();
 builder.Services.AddScoped<IFlashcardsRepository<Folder>, FolderRepository>();
 builder.Services.AddScoped<IFlashcardsRepository<Role>, RoleRepository>();
+builder.Services.AddScoped<IFlashcardsRepository<DeckUser>, DeckUserRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository<FlashcardDbContext>>();
 
 
