@@ -32,7 +32,8 @@ namespace Flashcards.Api.Controllers
         public async Task<ActionResult<Folder>> Get([FromRoute] Guid id)
         {
             var task = await _folderService.GetAsync(id);
-            return Ok(task);
+            var dto = _mapper.Map<FolderDto>(task);
+            return Ok(dto);
         }
 
         [HttpPost]
@@ -45,8 +46,9 @@ namespace Flashcards.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Folder folder)
+        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] FolderDto dto)
         {
+            var folder = _mapper.Map<Folder>(dto);
             var task = await _folderService.UpdateAsync(folder);
            return Ok(task.FolderId);
 
