@@ -10,7 +10,7 @@ namespace Flashcards.Dal.Repositories
         public override async Task<Folder> GetAsync(Guid guid)
         {
             var folder = await _dbContext.Set<Folder>()
-                .Where(f=>f.FolderId == guid)
+                .Where(f => f.FolderId == guid)
                 .Include(f => f.Decks)
                 .FirstOrDefaultAsync();
             return folder;
@@ -36,7 +36,7 @@ namespace Flashcards.Dal.Repositories
             if (entity.Decks != null)
             {
                 var decks = await _dbContext.Set<DeckFolder>()
-                    .Where(df=>df.FolderId == entity.FolderId)
+                    .Where(df => df.FolderId == entity.FolderId)
                     .ToListAsync();
 
                 decks.ForEach(element =>
@@ -45,7 +45,7 @@ namespace Flashcards.Dal.Repositories
                 });
                 await _dbContext.SaveChangesAsync();
 
-                foreach(var deck in entity.Decks)
+                foreach (var deck in entity.Decks)
                 {
                     var df = new DeckFolder()
                     {

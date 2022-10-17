@@ -2,7 +2,6 @@
 using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
 using Flashcards.Service.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards.Api.Controllers
@@ -50,7 +49,7 @@ namespace Flashcards.Api.Controllers
         {
             var folder = _mapper.Map<Folder>(dto);
             var task = await _folderService.UpdateAsync(folder);
-           return Ok(task.FolderId);
+            return Ok(task.FolderId);
 
         }
 

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
-using Flashcards.Service.DataServices;
 using Flashcards.Service.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards.Api.Controllers

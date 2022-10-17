@@ -62,7 +62,7 @@ namespace Flashcards.Dal.Repositories
         }
         public virtual async Task<T> DeleteIntermediateAsync(Guid guid, Guid guid2)
         {
-            return null ;
+            return null;
         }
 
         public bool ExistsAsync(Guid guid)

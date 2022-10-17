@@ -1,6 +1,5 @@
 ﻿using Flashcards.Domain.Interfaces;
 using Flashcards.Domain.Models.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards.Api.Controllers

@@ -1,6 +1,4 @@
-﻿using Flashcards.Domain.Models.Entities;
-
-namespace Flashcards.Service.Dtos
+﻿namespace Flashcards.Service.Dtos
 {
     public class DeckDto
     {

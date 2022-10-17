@@ -30,7 +30,7 @@ namespace Flashcards.Api.Controllers
         public async Task<ActionResult<List<DeckUser>>> GetAll(Guid userId, bool isEditable)
         {
             var task = await _deckUserService.GetAllList(userId, isEditable);
-          //  var dto = _mapper.Map<List<DeckDto>>(task);
+            //  var dto = _mapper.Map<List<DeckDto>>(task);
             return Ok(task);
         }
 
@@ -38,7 +38,7 @@ namespace Flashcards.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Flashcard>> Add([FromBody] DeckUser deck)
         {
-         //   var deck = _mapper.Map<Deck>(dto);
+            //   var deck = _mapper.Map<Deck>(dto);
             var task = await _deckUserService.AddAsync(deck);
 
             return Ok(task.DeckId);

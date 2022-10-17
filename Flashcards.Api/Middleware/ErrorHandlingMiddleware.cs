@@ -10,7 +10,8 @@ namespace Flashcards.Api.Middleware
             {
                 await next.Invoke(context);
             }
-            catch (BadRequestException badRequest) {
+            catch (BadRequestException badRequest)
+            {
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(badRequest.Message);
             }
@@ -19,11 +20,11 @@ namespace Flashcards.Api.Middleware
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
-         /*   catch (Exception e)
-            {
-                context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("Something went wrong :(");
-            }*/
+            /*   catch (Exception e)
+               {
+                   context.Response.StatusCode = 500;
+                   await context.Response.WriteAsync("Something went wrong :(");
+               }*/
 
         }
     }
