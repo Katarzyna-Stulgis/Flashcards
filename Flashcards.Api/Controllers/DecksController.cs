@@ -57,7 +57,6 @@ namespace Flashcards.Api.Controllers
         {
             var task = await _deckService.DeleteAsync(id);
             return Ok(id);
-
         }
 
     }
