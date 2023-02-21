@@ -37,11 +37,6 @@ namespace Flashcards.Service
             return await _repository.DeleteAsync(guid);
         }
 
-        /*        public virtual async Task<T> DeleteIntermediateAsync(Guid guid, Guid guid2)
-                {
-                    return await _repository.DeleteIntermediateAsync(guid, guid2);
-                }*/
-
         public virtual bool ExistsAsync(Guid guid)
         {
             return _repository.ExistsAsync(guid);
